@@ -15,7 +15,7 @@
             {% for cat in generous %}
             <a href="#" class="list-grouo-item-action">
               {{ cat.genre_title }}
-            {% endfor %}
+              {% endfor %}
             </a>
           </div>
         </li>
@@ -54,74 +54,69 @@
   </div>
 </nav>
 
-  <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="{%static 'img_1.png'%}" class="d-block w-100">
-      </div>
-      <div class="carousel-item">
-        <img src="{%static 'img_2.jpeg'%}" class="d-block w-100">
-      </div>
-      <div class="carousel-item">
-        <img src="{%static 'img_3.png'%}" class="d-block w-100">
-      </div>
-      <div class="carousel-item">
-        <img src="{%static 'img_4.webp'%}" class="d-block w-100">
-      </div>
-      <div class="carousel-item">
-        <img src="{%static 'img_5.png'%}" class="d-block w-100">
-      </div>
-      <div class="carousel-item">
-        <img src="{%static 'img_6.webp'%}" class="d-block w-100">
-      </div>
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{%static 'img_1.png'%}" class="d-block w-100">
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+    <div class="carousel-item">
+      <img src="{%static 'img_2.jpeg'%}" class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+      <img src="{%static 'img_3.png'%}" class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+      <img src="{%static 'img_4.webp'%}" class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+      <img src="{%static 'img_5.png'%}" class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+      <img src="{%static 'img_6.webp'%}" class="d-block w-100">
+    </div>
   </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 
 
 <div class="container">
   <div class="card-title">Book Sets
-  <div class="row mb-1">
+    <div class="row mb-1">
 
 
-    {% if books %}
-    {% for post in books %}
-    <div class="col-md-3">
-      <div class="card " style="width: 10rem;" >
-        <img src="{{ post.image.url }}" class="card-img-top">
-        <div class="card-body">
-          <h5 class="card-title">{{ post.title }}</h5>
+      {% if books %}
+      {% for post in books %}
+      <div class="col-md-3">
+        <div class="card " style="width: 10rem;">
+          <img src="{{ post.image.url }}" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5></div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ post.price }}</li>
+          </ul>
+          <p class="text-muted small">
+            Author: {{ post.author|default:"Guest" }}</p>
+          <p class="card-text">{{ post.genre }}</p>
+          <p class="card-text">{{ post.nop }}</p>
+          <p class="card-text">{{ post.isbn }}</p>
+          <p class="card-text">{{ post.description }}</p>
+          <div class="d-flex justify-content-end">
+            <a href="{% url 'viewBook' %}" class="btn btn-success">Read More</a>
+          </div>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">{{ post.price }}</li>
-        </ul>
-        <p class="text-muted small">
-          Author: {{ post.author|default:"Guest" }}</p>
-        <p class="card-text">{{ post.genre }}</p>
-        <p class="card-text">{{ post.nop }}</p>
-        <p class="card-text">{{ post.isbn }}</p>
-        <p class="card-text">{{ post.description }}</p>
-        <div class="d-flex justify-content-end">
-          <a href="{% url 'viewBook' %}" class="btn btn-success">Read More</a>
-    </div>
       </div>
-      </div>
-      </div>
-    </div>
-  </div>
-  </div>
-</div>
 {% endfor %}
-{% else%} 
-  <h1>Not Found</h1>
+{% else%}
+<h1>Not Found</h1>
 {% endif %}
+
 
 
 
