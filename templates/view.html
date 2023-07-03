@@ -1,0 +1,78 @@
+{% extends 'base.html' %} {% block title %} {{ post.title }} {% endblock %} 
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-3">
+      <div class="list-group">
+        <a href="" class="list-group-item list-group-item-action active"
+          >Categories</a
+        >
+        {% for cat in generous %}
+        <a
+          href="{% url 'filterCategory' cat.id %}"
+          class="list-group-item list-group-item-action">{{ cat.genre_title }}</a>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img
+              src="{{ post.image.url }}"
+              class="img-fluid rounded-start"
+              alt="..."
+            />
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ post.price }}</li>
+          </ul>
+          <p class="text-muted small">
+            Author: {{ post.author|default:"Guest" }}</p>
+          <p class="card-text">{{ post.genre }}</p>
+          <p class="card-text">{{ post.nop }}</p>
+          <p class="card-text">{{ post.isbn }}</p>
+          <p class="card-text">{{ post.description }}</p>
+
+          {% if user.is_authenticated and user.id == post.author.id %} 
+              <div class="d-flex justify-content-end gap-3">
+                <a href="{% url 'editNews' post.slug %}" class="btn btn-success"
+                  >Edit</a
+                >
+                <a
+                  href="{% url 'deleteNews' post.slug %}"
+                  class="btn btn-danger"
+                  >Delete</a
+                >
+              </div>
+              {% endif %}
+
+              <div class="card">
+                <div class="card-header">
+                  <h2>Related Post</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                      <div class="col-4">
+                        {% for related_post in related_posts %}
+                          <div class="card">
+                            <img src="{{ related_post.image.url }}" alt="" class="w-100">
+                            <div class="card-body">
+                              <h2>{{ related_post.title }}</h2>
+                              <a href="" class="btn btn-success btn-sm">Read More</a>
+                            </div>
+                          </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      
+{% endblock content %}
