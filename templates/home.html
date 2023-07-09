@@ -3,55 +3,21 @@
 {% block content %}
 {% load static%}
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary ">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary ">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-
-
-        <li class="nav-item">
-          <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action ">Category</a>
-            {% for cat in generous %}
-            <a href="#" class="list-grouo-item-action">
-              {{ cat.genre_title }}
-              {% endfor %}
-            </a>
-          </div>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">Category</a>
+          <ul class="dropdown-menu">
+              <li>{% for cat in generous %}
+                <a class="dropdown-item" href="#">{{ cat.genre_title }}</a>
+              </li>
         </li>
-
-
-
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">99 Store</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Newly Added Books</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Hindi Novels</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Graphics Comics</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Merchandise</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Lock The Box</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Book Bundles</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Literature And Fiction</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">India Top Read</a>
-        </li>
-      </ul>
+        {% endfor %}
+      </div>
     </div>
-  </div>
 </nav>
 
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
@@ -85,12 +51,9 @@
   </button>
 </div>
 
-
 <div class="container">
   <div class="card-title">Book Sets
     <div class="row mb-1">
-
-
       {% if books %}
       {% for post in books %}
       <div class="col-md-3">
@@ -99,14 +62,12 @@
           <div class="card-body">
             <h5 class="card-title">{{ post.title }}</h5></div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">{{ post.price }}</li>
+            <li class="list-group-item">Price: {{ post.price }}</li>
           </ul>
           <p class="text-muted small">
             Author: {{ post.author|default:"Guest" }}</p>
-          <p class="card-text">{{ post.genre }}</p>
-          <p class="card-text">{{ post.nop }}</p>
-          <p class="card-text">{{ post.isbn }}</p>
-          <p class="card-text">{{ post.description }}</p>
+          <p class="card-text">Category:{{ post.category }}</p>
+          <p class="card-text">Genre:{{ post.genre }}</p>
           <div class="d-flex justify-content-end">
             <a href="{% url 'viewBook' %}" class="btn btn-success">Read More</a>
           </div>
@@ -116,8 +77,4 @@
 {% else%}
 <h1>Not Found</h1>
 {% endif %}
-
-
-
-
 {% endblock content %}

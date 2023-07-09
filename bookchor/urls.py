@@ -8,7 +8,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("",home, name="home"),
-    path("news/",viewBook, name="viewBook"),
+    path("book/",viewBook, name="viewBook"),
     path("generous/<int:id>/",filterGenerous, name="filterGenerous"),
     path("delete/",deleteBook, name="deleteBook"),
     path("insert/",addBook, name="addBook"),

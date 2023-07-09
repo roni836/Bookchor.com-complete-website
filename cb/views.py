@@ -15,9 +15,9 @@ def home(r):
 def viewBook(r):
     data = {
         "generous": Generous.objects.all(),
-        "book" : Post.objects.all()
+        "books" : Post.objects.filter()
     }
-    return render(r,"views.html",data)
+    return render(r,"view.html",data)
 
 @login_required
 def addBook(r):
@@ -37,7 +37,7 @@ def addBook(r):
 def deleteBook(r):
     data = Post.objects.all()
     data.delete()
-    return redirect(home)
+    return redirect(r,home)
 
 def editBook(r):
     post = Post.objects.all()

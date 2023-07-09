@@ -1,7 +1,8 @@
 from django.forms import ModelForm
+from django import forms
 from .models import *
 
 class PostForm(ModelForm):
     class Meta:
         model = Post
-        exclude = ("author","isbn")
+        fields = "__all__"
