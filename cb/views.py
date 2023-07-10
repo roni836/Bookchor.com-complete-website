@@ -12,10 +12,11 @@ def home(r):
     }
     return render(r,"home.html",data)
 
-def viewBook(r):
+def viewBook(r, id):
     data = {
         "generous": Generous.objects.all(),
-        "books" : Post.objects.filter()
+        "post" : Post.objects.get(pk=id),
+        "related_post" :Post.objects.exclude(pk=id)
     }
     return render(r,"view.html",data)
 
@@ -29,18 +30,17 @@ def addBook(r):
 
     if r.method == "POST":
         formData = form.save(commit=False)
-        formData.author = r.user
         formData.save()
         return redirect(home)
     return render(r,"insert.html",data)
 
-def deleteBook(r):
-    data = Post.objects.all()
+def deleteBook(r,id):
+    data = Post.objects.get(id=id)
     data.delete()
-    return redirect(r,home)
+    return redirect(home)
 
-def editBook(r):
-    post = Post.objects.all()
+def editBook(r,id):
+    post = Post.objects.get(id=id)
     form = PostForm(r.POST or None,r.FILES or None,instance=post)
     data = {
         "form":form,
@@ -49,7 +49,6 @@ def editBook(r):
 
     if r.method == "POST":
         formData = form.save(commit=False)
-        formData.author = r.user
         formData.save()
         return redirect(home)
 
@@ -83,17 +82,18 @@ def signIn(r):
 
 def filterGenerous(r,id):
     data = {
-        "posts":Post.objects.filter(generous__id=id),
+        "books":Post.objects.filter(generous__id=id),
         "generous":Generous.objects.all()
     }
     return render(r, "home.html",data)
 
 def searchBook(r):
     search = r.GET.get('search')
-    data = {
-        "posts":Post.objects.filter(title__icontains=search),
-        "generous":Generous.objects.all()
-    }
+    if search != "":
+        data = {
+            "books":Post.objects.filter(title__icontains=search),
+            "generous":Generous.objects.all()
+        }
     return render(r, "home.html",data) 
 
 def signOut(r):

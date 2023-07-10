@@ -3,21 +3,21 @@
 {% block content %}
 {% load static%}
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary ">
+<nav class="navbar navbar-expand-lg bg-body-tertiary ">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">Category</a>
+            aria-expanded="false">Category</a>
           <ul class="dropdown-menu">
-              <li>{% for cat in generous %}
-                <a class="dropdown-item" href="#">{{ cat.genre_title }}</a>
-              </li>
+            <li>{% for post in generous %}
+              <a class="dropdown-item" href="{% url 'filterGenerous' post.id %}">{{ post.genre_title }}</a>
+            </li>
         </li>
         {% endfor %}
-      </div>
     </div>
+  </div>
 </nav>
 
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
@@ -51,30 +51,31 @@
   </button>
 </div>
 
-<div class="container">
-  <div class="card-title">Book Sets
+<div class="container-fluid">
+    <h4>Book Sets</h4>
     <div class="row mb-1">
       {% if books %}
       {% for post in books %}
-      <div class="col-md-3">
-        <div class="card " style="width: 10rem;">
+      <div class="col-md-2">
+        <div class="card " style="width: 12rem;">
           <img src="{{ post.image.url }}" class="card-img-top">
           <div class="card-body">
-            <h5 class="card-title">{{ post.title }}</h5></div>
+            <h5 class="card-title">{{ post.title }}</h5>
+          </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Price: {{ post.price }}</li>
+            <li class="list-group-item">Rs. {{ post.price }}</li>
           </ul>
-          <p class="text-muted small">
-            Author: {{ post.author|default:"Guest" }}</p>
-          <p class="card-text">Category:{{ post.category }}</p>
-          <p class="card-text">Genre:{{ post.genre }}</p>
+          <p class="card-header">
+            Author: {{ post.author }}</p>
+          <p class="card-header">Category: {{ post.generous }}</p>
           <div class="d-flex justify-content-end">
-            <a href="{% url 'viewBook' %}" class="btn btn-success">Read More</a>
+            <a href="{% url 'viewBook' post.id %}" class="btn btn-primary">Read More</a>
           </div>
         </div>
       </div>
-{% endfor %}
-{% else%}
-<h1>Not Found</h1>
-{% endif %}
-{% endblock content %}
+      
+      {% endfor %}
+      {% else%}
+      <h1>Not Found</h1>
+      {% endif %}
+      {% endblock content %}

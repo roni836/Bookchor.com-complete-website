@@ -9,16 +9,16 @@ class Generous(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=20,unique=True)
-    category = models.ForeignKey(Generous,on_delete=models.CASCADE)
-    author = models.ForeignKey(User,on_delete=models.CASCADE) 
+    generous = models.ForeignKey(Generous,on_delete=models.CASCADE)
+    author = models.CharField(max_length=30) 
     price = models.IntegerField(max_length=5)
     nop = models.IntegerField(max_length=20)
-    genre = models.CharField(max_length=20)
     isbn = models.IntegerField(max_length=20)
     image = models.ImageField(upload_to="post/")
     description = models.TextField()
 
     def __str__(self):
         return self.title
+        
     
 

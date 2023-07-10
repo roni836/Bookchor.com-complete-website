@@ -8,14 +8,14 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("",home, name="home"),
-    path("book/",viewBook, name="viewBook"),
+    path("book/<int:id>/",viewBook, name="viewBook"),
     path("generous/<int:id>/",filterGenerous, name="filterGenerous"),
-    path("delete/",deleteBook, name="deleteBook"),
+    path("delete/<int:id>/",deleteBook, name="deleteBook"),
     path("insert/",addBook, name="addBook"),
     path("login/",signIn, name="signIn"),
     path("logout/",signOut, name="signOut"),
     path("register/",signUp, name="signUp"),
-    path("edit/",editBook, name="editBook"),
+    path("edit/<int:id>/",editBook, name="editBook"),
     path("search/",searchBook, name="search"),
     re_path('^', include('django.contrib.auth.urls')),
 ] 
